@@ -1,0 +1,99 @@
+swagger: '2.0'
+info:
+  description: Dokku DBaaS ドキュメント
+  version: 0.0.1
+  title: Dokku DBaaS REST APIs
+#host: localhost:8080
+basePath: /api
+tags:
+  - name: list
+    description: DB list APIs
+  - name: instance
+    description: DB instance APIs
+schemes:
+  - http
+  - https
+paths:
+  /dokku/{db}:
+    get:
+      tags:
+        - list
+      summary: DB 一覧
+      description: DB 一覧取得
+      produces:
+        - application/json
+      parameters:
+        - name: db
+          type: string
+          in: path
+          description: DB 種類（postgres, mysql, redis, couchdb, ..）
+      responses:
+        '200':
+          description: 成功
+        '400':
+          description: エラー
+  /dokku/{db}/{name}:
+    get:
+      tags:
+        - instance
+      summary: DB 取得
+      description: DB 情報取得
+      produces:
+        - application/json
+      parameters:
+        - name: db
+          type: string
+          in: path
+          description: DB 種類（postgres, mysql, redis, couchdb, ..）
+        - name: name
+          type: string
+          in: path
+          description: DB 名
+      responses:
+        '200':
+          description: 成功
+        '400':
+          description: エラー
+    post:
+      tags:
+        - instance
+      summary: DB 作成
+      description: DB 作成
+      produces:
+        - application/json
+      parameters:
+        - name: db
+          type: string
+          in: path
+          description: DB 種類（postgres, mysql, redis, couchdb, ..）
+        - name: name
+          type: string
+          in: path
+          description: DB 名
+      responses:
+        '200':
+          description: 成功
+        '400':
+          description: エラー
+    delete:
+      tags:
+        - instance
+      summary: DB 削除
+      description: DB 削除
+      produces:
+        - application/json
+      parameters:
+        - name: db
+          type: string
+          in: path
+          description: DB 種類（postgres, mysql, redis, couchdb, ..）
+        - name: name
+          type: string
+          in: path
+          description: DB 名
+      responses:
+        '200':
+          description: 成功
+        '400':
+          description: エラー
+
