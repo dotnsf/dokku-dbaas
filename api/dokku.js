@@ -23,7 +23,7 @@ api.listDb = function( db ){
     if( db ){
       var cmd1 = 'dokku ' + db + ':list';
       exec( cmd1, function( err1, stdout1, stderr1 ){
-        if( err1 ){
+        if( stderr1 ){
           resolve( { status: false, error: stderr1 } );
         }else{
           resolve( { status: true, result: stdout1 } );
@@ -40,18 +40,18 @@ api.createDb = function( db, name ){
     if( db && name ){
       var cmd1 = 'dokku ' + db + ':create ' + name;
       exec( cmd1, function( err1, stdout1, stderr1 ){
-        if( err1 ){
-          resolve( { status: false, error: stderr1 } );
-        }else{
+        //if( stderr1 ){
+        //  resolve( { status: false, error: stderr1 } );
+        //}else{
           var cmd2 = 'dokku ' + db + ':expose ' + name;
           exec( cmd2, function( err2, stdout2, stderr2 ){
-            if( err2 ){
+            if( stderr2 ){
               resolve( { status: false, error: stderr2 } );
             }else{
               resolve( { status: true, result: stdout2 } );
             }
           });
-        }
+        //}
       });
     }else{
       resolve( { status: false, error: 'parameter db and/or name required.' } );
@@ -64,7 +64,7 @@ api.getDb = function( db, name ){
     if( db && name ){
       var cmd1 = 'dokku ' + db + ':info ' + name;
       exec( cmd1, function( err1, stdout1, stderr1 ){
-        if( err1 ){
+        if( stderr1 ){
           resolve( { status: false, error: stderr1 } );
         }else{
           resolve( { status: true, result: stdout1 } );
@@ -81,7 +81,7 @@ api.deleteDb = function( db, name ){
     if( db && name ){
       var cmd1 = 'dokku ' + db + ':destroy ' + name;
       exec( cmd1, function( err1, stdout1, stderr1 ){
-        if( err1 ){
+        if( stderr1 ){
           resolve( { status: false, error: stderr1 } );
         }else{
           resolve( { status: true, result: stdout1 } );
