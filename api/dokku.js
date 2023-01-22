@@ -40,11 +40,17 @@ api.createDb = function( db, name ){
     if( db && name ){
       var cmd1 = 'dokku ' + db + ':create ' + name;
       exec( cmd1, function( err1, stdout1, stderr1 ){
+        console.log( {err1} );  //. stderr1: '/home/dokku/.basher/bash: line 1: main: command not found\n'
+        console.log( {stdout1} );
+        console.log( {stderr1} );
         //if( stderr1 ){
         //  resolve( { status: false, error: stderr1 } );
         //}else{
           var cmd2 = 'dokku ' + db + ':expose ' + name;
           exec( cmd2, function( err2, stdout2, stderr2 ){
+        console.log( {err2} );
+        console.log( {stdout2} );
+        console.log( {stderr2} );
             if( stderr2 ){
               resolve( { status: false, error: stderr2 } );
             }else{
